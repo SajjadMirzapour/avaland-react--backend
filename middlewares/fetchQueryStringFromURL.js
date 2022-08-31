@@ -11,7 +11,6 @@ function fetchQueryStringFromURL(req, res, next) {
       });
     }
     req.params = result;
-    console.log('fetch');
     return req;
 
   } catch (e) {

@@ -18,7 +18,6 @@ class Router {
     routeObject = new Route(route, handler, routeMethod);
     this.#routePool.set(`${routeObject.url}_${routeObject.method}`, routeObject);
     this.#addListeners(`${routeObject.url}_${routeObject.method}`);
-    console.log('poolLog', this.#routePool);
     return routeObject;
   }
 
@@ -27,8 +26,6 @@ class Router {
       let route = req.url.split("?")[0];
       let middlewares = this.#routePool.get(`${route}_${req.method}`)?.middlewares;
       let handler = this.#routePool.get(`${route}_${req.method}`).handler;
-
-      //console.log(route, middlewares, handler);
       let runMiddlewareForRoute = await this.#runMiddlewares(middlewares, req, res);
       if (runMiddlewareForRoute) await handler(req, res);
 

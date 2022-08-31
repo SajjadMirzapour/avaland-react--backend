@@ -13,8 +13,6 @@ class Route {
       middleware.forEach(mid => this.middlewares.push(mid));
     else
       this.middlewares.push(middleware);
-    // this.middlewares.push(Array.isArray(middleware) ? ...middleware : middleware)
-    // console.log('this', this);
     return this;
   }
 }
