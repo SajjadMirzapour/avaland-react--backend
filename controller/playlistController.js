@@ -39,7 +39,7 @@ async function createPlaylist(req, res) {
             data = JSON.parse(data);
             Playlist.create(data)
         })
-        res.setHeader('content-type', 'application/json');
+        res.writeHead(200, { 'Content-Type': 'application/json' })
         res.write(JSON.stringify({ message: 'added Successfully' }));
         return res.end();
     } catch (e) {
@@ -49,8 +49,9 @@ async function createPlaylist(req, res) {
 
 async function playlistSongs(req, res) {
     try {
-        const songsInPlaylist = await Playlist.findSongs()
-        res.setHeader('content-type', 'application/json');
+        const playlistId = req.params?.playlistId
+        const songsInPlaylist = await Playlist.findSongs(playlistId)
+        res.writeHead(200, { 'Content-Type': 'application/json' })
         res.write(JSON.stringify(songsInPlaylist));
         return res.end()
     }
