@@ -1,4 +1,4 @@
-const { connectDB } = require('../helper');
+const { connectDB } = require('../config');
 
 async function findAll(req, res) {
     const pool = connectDB();
