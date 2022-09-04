@@ -7,12 +7,12 @@ const RouterClass = require('./Router');
 const Router = new RouterClass();
 
 Router.addRoute('/musics', getMusics, 'get').middleware([fetchQueryStringFromURL]);
-Router.addRoute('/music/create', createMusic, 'post').middleware([])
-Router.addRoute('/music/like', likeMusic, 'post').middleware([])
+Router.addRoute('/musics/create', createMusic, 'post').middleware([])
+Router.addRoute('/musics/like', likeMusic, 'post').middleware([])
 
 Router.addRoute('/playlists', getPlaylists, 'get').middleware(fetchQueryStringFromURL);
-Router.addRoute('/addplaylist', createPlaylist, 'post').middleware([])
-Router.addRoute('/playlistSongs', playlistSongs, 'get').middleware(fetchQueryStringFromURL)
+Router.addRoute('/playlists/create', createPlaylist, 'post').middleware([])
+Router.addRoute('/playlists/songs', playlistSongs, 'get').middleware(fetchQueryStringFromURL)
 
 
 const server = http.createServer((req, res) => {
