@@ -39,15 +39,6 @@ async function findSongs(playlistId) {
     return mySong
 }
 
-// const queryForGettingMap = await (await pool.query('SELECT * FROM "map_music_playlist" WHERE playlist_id=($1)', [playlistId])).rows
-// const musicIds = queryForGettingMap.map(record => record.music_id).toString()
-// console.log(musicIds);
-// const queryForGettingMusics = await (await pool.query(`SELECT * FROM music WHERE id IN ($1)`, [musicIds])).rows
-// // const resultyForGettingMusics = await (await pool.query(queryForGettingMusics)).rows
-// console.log('hii', queryForGettingMusics);
-// pool.end();
-// return queryForGettingMusics
-
 module.exports = {
     findAll,
     findById,
