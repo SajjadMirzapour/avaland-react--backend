@@ -31,7 +31,7 @@ async function getPlaylist(req, res, id) {
 
 async function createPlaylist(req, res) {
     try {
-        data = req.bod
+        data = req.body
         Playlist.create(data)
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.write(JSON.stringify({ message: 'added Successfully' }));
