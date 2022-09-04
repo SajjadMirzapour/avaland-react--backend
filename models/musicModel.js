@@ -1,65 +1,29 @@
-const { Pool } = require('pg')
+const { connectDB } = require('../helper');
 
 async function findAll(req, res) {
-
-    const pool = new Pool({
-        user: 'mirage',
-        host: '192.168.5.121',
-        Port: '5432',
-        database: 'college',
-        schema: 'mirage',
-        password: '&6Tw3C0V4q@w'
-    });
-
-    const queryForGetMusics = 'select * from music';
-    const resultForGetMusics = await (await pool.query(queryForGetMusics)).rows;
+    const pool = connectDB();
+    const queryForGettingMusics = 'select * from music';
+    const resultForGettingMusics = await (await pool.query(queryForGettingMusics)).rows;
     pool.end();
-    return resultForGetMusics;
+    return resultForGettingMusics;
 }
 
 async function findById(id) {
-
-    const pool = new Pool({
-        user: 'mirage',
-        host: '192.168.5.121',
-        Port: '5432',
-        database: 'college',
-        schema: 'mirage',
-        password: '&6Tw3C0V4q@w'
-    });
-
-    const queryForGetMusic = `SELECT * FROM music where id=${id}`;
-    const resultForGetMusic = await (await pool.query(queryForGetMusic)).rows;
+    const pool = connectDB();
+    const queryForGettingMusic = `SELECT * FROM music where id=${id}`;
+    const resultForGettingMusic = await (await pool.query(queryForGettingMusic)).rows;
     pool.end();
-    return resultForGetMusic;
+    return resultForGettingMusic;
 }
 
 async function create(obj) {
-
-    const pool = new Pool({
-        user: 'mirage',
-        host: '192.168.5.121',
-        Port: '5432',
-        database: 'college',
-        schema: 'mirage',
-        password: '&6Tw3C0V4q@w'
-    });
-
-    let amir = await pool.query('insert into music (title ,singer) values ($1,$2)', [obj.title, obj.singer]);
-    return amir;
+    const pool = connectDB();
+    const queryForInsertingMusic = await pool.query('insert into music (title ,singer) values ($1,$2)', [obj.title, obj.singer]);
+    return queryForInsertingMusic;
 }
 
 async function like(data) {
-
-    const pool = new Pool({
-        user: 'mirage',
-        host: '192.168.5.121',
-        Port: '5432',
-        database: 'college',
-        schema: 'mirage',
-        password: '&6Tw3C0V4q@w'
-    });
-
+    const pool = connectDB();
     let checkForLike = await (await pool.query('select * from "like" where audience_id=($1)', [data.audience_id])).rows
 
     const likeModel = {}
