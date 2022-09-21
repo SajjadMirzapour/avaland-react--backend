@@ -2,7 +2,7 @@ const { connectDB } = require('../config');
 
 async function findAll(req, res) {
     const pool = connectDB();
-    const queryForGettingMusics = await pool.query('select * from musics')
+    const queryForGettingMusics = await pool.query('select * from music')
     const resultForGettingMusics = queryForGettingMusics.rows
     pool.end();
     return resultForGettingMusics;

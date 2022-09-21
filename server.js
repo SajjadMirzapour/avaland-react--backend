@@ -3,7 +3,7 @@ const { getMusics, createMusic, likeMusic } = require('./controller/musicControl
 const { getPlaylists, createPlaylist, playlistSongs } = require('./controller/playlistController');
 const { fetchQueryStringFromURL, getPostData } = require('./middlewares');
 
-const RouterClass = require('./Router');
+const RouterClass = require('./router/Router');
 const Router = new RouterClass();
 
 Router.addRoute('/musics', getMusics, 'get').middleware([fetchQueryStringFromURL]);
