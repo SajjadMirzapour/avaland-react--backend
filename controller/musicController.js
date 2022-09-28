@@ -60,8 +60,38 @@ async function likeMusic(req, res) {
     }
 }
 
+
+async function deleteMusic(req, res) {
+    try {
+        data = req.body
+        Music.delet(data)
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.write(JSON.stringify({ message: 'music deleted successfully' }));
+        return res.end();
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+async function updateMusic(req, res) {
+    try {
+        data = req.body
+        Music.update(data)
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.write(JSON.stringify({ message: 'music updated successfully' }));
+        return res.end();
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
+
 module.exports = {
     getMusics,
     createMusic,
-    likeMusic
+    likeMusic,
+    updateMusic,
+    deleteMusic
 }

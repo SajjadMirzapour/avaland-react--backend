@@ -43,10 +43,29 @@ async function like(data) {
     }
 }
 
+async function delet(obj) {
+
+    const musicRow = await findById(obj.id);
+    console.log(musicRow.id);
+    const pool = connectDB();
+    const queryForDeletMusic = await pool.query(`delete from musics where id=${obj.id}`)
+    pool.end();
+    return queryForDeletMusic;
+}
+
+async function update(obj) {
+    const pool = connectDB();
+    const queryForupdateMusic = await pool.query(`update musics set title=$1 , singer=$2, album=$3, year=$4, genre=$5  WHERE id=${obj.id}`, [obj.title, obj.singer, obj.album, obj.year, obj.genre])
+    pool.end();
+    return queryForupdateMusic;
+}
+
 
 module.exports = {
     findAll,
     findById,
     create,
-    like
+    like,
+    delet,
+    update
 }

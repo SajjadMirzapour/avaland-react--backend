@@ -3,7 +3,7 @@ const { connectDB } = require('../config');
 async function findAll(req, res) {
     const pool = connectDB();
 
-    const queryGettingPlaylists = await pool.query('SELECT * FROM playlists')
+    const queryGettingPlaylists = await pool.query('SELECT * FROM playlist')
     const resultGettingPlaylists = queryGettingPlaylists.rows;
     pool.end();
     return resultGettingPlaylists;
@@ -12,7 +12,7 @@ async function findAll(req, res) {
 async function findById(id) {
     const pool = connectDB();
 
-    const queryForGettingPlaylist = await pool.query(`SELECT * FROM playlists WHERE id=${id}`)
+    const queryForGettingPlaylist = await pool.query(`SELECT * FROM playlist WHERE id=${id}`)
     const resultForGettingPlaylist = queryForGettingPlaylist.rows
     pool.end();
     return resultForGettingPlaylist;
@@ -21,7 +21,7 @@ async function findById(id) {
 async function create(obj) {
     const pool = connectDB();
 
-    const queryForInsertingPlaylist = await pool.query(`insert into playlists (name, audience_id) values ($1,$2)`, [obj.name, obj.audience_id])
+    const queryForInsertingPlaylist = await pool.query(`insert into playlist (name, audience_id) values ($1,$2)`, [obj.name, obj.audience_id])
     pool.end();
     return queryForInsertingPlaylist;
 }
@@ -41,9 +41,29 @@ async function findSongs(playlistId) {
     return mySong
 }
 
+async function delet(obj) {
+    const pool = connectDB();
+    const queryForDeletPlaylist = await pool.query(`delete from playlist where id=${obj.id}`)
+    pool.end();
+    return queryForDeletPlaylist;
+}
+
+async function update(obj) {
+    const pool = connectDB();
+    const queryForupdatePlaylist = await pool.query(`update playlist set name=$1 , info=$2  WHERE id=${obj.id}`, [obj.name, obj.info])
+    pool.end();
+    return queryForupdatePlaylist;
+}
+
+
+
+
+
 module.exports = {
     findAll,
     findById,
     create,
-    findSongs
+    findSongs,
+    delet,
+    update
 }

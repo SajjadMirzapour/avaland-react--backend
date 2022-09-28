@@ -54,8 +54,37 @@ async function playlistSongs(req, res) {
     }
 }
 
+
+async function deletePlaylist(req, res) {
+    try {
+        data = req.body
+        Playlist.delet(data)
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.write(JSON.stringify({ message: 'deleted successfully' }));
+        return res.end();
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+async function updatePlaylist(req, res) {
+    try {
+        data = req.body
+        Playlist.update(data)
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.write(JSON.stringify({ message: 'updated successfully' }));
+        return res.end();
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 module.exports = {
     getPlaylists,
     createPlaylist,
-    playlistSongs
+    playlistSongs,
+    deletePlaylist,
+    updatePlaylist
 }
