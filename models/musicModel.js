@@ -46,7 +46,7 @@ async function like(data) {
 async function delet(obj) {
 
     const musicRow = await findById(obj.id);
-    console.log(musicRow.id);
+
     const pool = connectDB();
     const queryForDeletMusic = await pool.query(`delete from musics where id=${obj.id}`)
     pool.end();

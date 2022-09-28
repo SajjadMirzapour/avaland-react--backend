@@ -21,7 +21,7 @@ async function findById(id) {
 async function create(obj) {
     const pool = connectDB();
 
-    const queryForInsertingPlaylist = await pool.query(`insert into playlist (name, audience_id) values ($1,$2)`, [obj.name, obj.audience_id])
+    const queryForInsertingPlaylist = await pool.query(`insert into playlist (name, ujnser_id) values ($1,$2)`, [obj.name, obj.audience_id])
     pool.end();
     return queryForInsertingPlaylist;
 }
