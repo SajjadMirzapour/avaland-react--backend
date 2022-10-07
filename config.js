@@ -11,3 +11,19 @@ function connectDB() {
     })
 }
 module.exports.connectDB = connectDB;
+
+
+//for local data-base
+
+// function connectDB() {
+//     return new Pool({
+//         user: 'postgres',
+//         host: 'localhost',
+//         Port: '5432',
+//         database: 'postgres',
+//         schema: 'postgres',
+//         password: 'mirzapours972',
+//     })
+// }
+
+module.exports.connectDB = connectDB;
