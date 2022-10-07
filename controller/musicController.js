@@ -86,6 +86,17 @@ async function updateMusic(req, res) {
     }
 }
 
+async function favoriteMusics(req, res) {
+    try {
+        let musics = await Music.findFavorite();
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(musics));
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
+
 
 
 module.exports = {
@@ -93,5 +104,6 @@ module.exports = {
     createMusic,
     likeMusic,
     updateMusic,
-    deleteMusic
+    deleteMusic,
+    favoriteMusics
 }
