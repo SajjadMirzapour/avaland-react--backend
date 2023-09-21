@@ -8,15 +8,12 @@ async function findAll(req, res) {
     const resultGettingPlaylists = queryGettingPlaylists.rows;
 
     const result = [];
-    for (const item of resultGettingPlaylists) {
-
+    for (let item of resultGettingPlaylists) {
         const queryForGettingCounts = await pool.query(`SELECT music_id FROM map_music_playlist where playlist_id=${item.id}`);
         const resultForGettingCounts = queryForGettingCounts.rows
 
-
         const queryGettingMapOfPlaylist = await pool.query(`SELECT music_id FROM map_music_playlist where playlist_id=${item.id}`);
         const resultGettingMapOfPlaylist = queryGettingMapOfPlaylist.rows
-
 
         const queryForGettingMusicsOfMusicMap = await pool.query(`SELECT * FROM musics WHERE id IN (${resultGettingMapOfPlaylist.map(item => item.music_id).join(', ')})`)
         const resultForGettingMusicsOfMusicMap = queryForGettingMusicsOfMusicMap.rows
@@ -65,7 +62,7 @@ async function create(obj) {
 async function findSongs(playlistId) {
     const pool = connectDB();
 
-    const queryForGettingMap = await pool.query(`SELECT * FROM "map_music_playlist" WHERE playlist_id=${playlistId}`)
+    const queryForGettingMap = await pool.query(`SELECT * FROM map_music_playlist WHERE playlist_id=${playlistId}`)
     const resultForGettingMap = queryForGettingMap.rows
     let mySong = []
     for (let n = 0; n <= resultForGettingMap.length - 1; n++) {

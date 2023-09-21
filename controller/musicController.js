@@ -29,13 +29,31 @@ async function getMusic(req, res, id) {
     }
 }
 
+async function handleOption(req, res) {
+    try {
+        res.setHeader('Access-Control-Allow-Methods', 'POST', 'GET', 'DELETE', 'PUT');
+        return res.end();
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 async function createMusic(req, res) {
     try {
-        const data = req.body
-        Music.create(data)
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.write(JSON.stringify({ message: 'added Successfully' }));
-        return res.end();
+        if (req.method === 'OPTIONS') {
+            res.setHeader('Access-Control-Allow-Methods', 'POST', 'GET', 'DELETE', 'PUT');
+            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+            return res.end();
+        }
+        else {
+            const data = req.body
+            console.log('data', data);
+            Music.create(data)
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.write(JSON.stringify({ message: 'music added Successfully' }));
+            return res.end();
+        }
     } catch (e) {
         console.log(e);
     }
@@ -97,10 +115,9 @@ async function favoriteMusics(req, res) {
     }
 }
 
-
-
 module.exports = {
     getMusics,
+    handleOption,
     createMusic,
     likeMusic,
     updateMusic,

@@ -35,7 +35,6 @@ async function findByCredintials(credintials) {
 
 async function create(obj) {
     const pool = connectDB();
-
     const queryForInsertingPlaylist = await pool.query(`insert into users (username, password) values ($1,$2)`, [obj.username, +obj.password])
     pool.end();
     return queryForInsertingPlaylist;
@@ -46,5 +45,4 @@ module.exports = {
     findById,
     create,
     findByCredintials,
-
 }

@@ -32,7 +32,7 @@ async function getUser(req, res, id) {
 async function signUp(req, res) {
     try {
         data = req.body
-        User.create(data)
+        await User.create(data)
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.write(JSON.stringify({ message: 'user added Successfully' }));
         return res.end();
@@ -50,7 +50,7 @@ async function singIn(req, res) {
         if (user) {
             res.setHeader('Set-Cookie', `token=12345`);
             res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.write(JSON.stringify({ message: 'user found' }));
+            res.write(JSON.stringify({ message: 'welcome !!!' }));
             return res.end();
         }
 
